@@ -1,0 +1,21 @@
+class Solution {
+   long killinSpree(long n) {
+        long l=1,h=(long)Math.sqrt(n),m=0,res=0;
+
+        while(l<=h)
+        {
+            m=(l+h)/2;
+           long sum = m * (m + 1) * (2 * m + 1) / 6;
+            if(sum>n)
+            {
+                h=m-1;
+            }
+            else
+            {
+                res=m;
+                l=m+1;
+            }
+        }
+        return res;
+    }
+}
