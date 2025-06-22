@@ -1,0 +1,45 @@
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        int k = sc.nextInt();
+        int maxBoard = 0, totalLength = 0;
+        for (int i = 0; i < n; i++) {
+            maxBoard = Math.max(maxBoard, arr[i]);
+            totalLength += arr[i];
+        }
+
+        int low = maxBoard, high = totalLength;
+        int answer = high;
+        while (low <= high)
+        {
+            int mid = (low + high) / 2;
+            int painters = 1, currentSum = 0;
+            for (int i = 0; i < n; i++) 
+            {
+                if (currentSum + arr[i] <= mid)
+                {
+                    currentSum += arr[i];
+                }
+                else 
+                {
+                    painters++;
+                    currentSum = arr[i];
+                }
+            }
+
+            if (painters <= k) {
+                answer = mid;
+                high = mid - 1;  
+            } else {
+                low = mid + 1;   
+            }
+        }
+        System.out.println( answer);
+    }
+}
